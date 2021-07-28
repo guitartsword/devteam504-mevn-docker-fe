@@ -1,5 +1,16 @@
 # mevn-frontend
 
+## Build Project
+```
+docker build -t isaias-mevn .
+```
+
+## Run project
+```
+docker run --rm --name mevn-fe -d -p 8080:80 isaias-mevn
+```
+
+
 ## Project setup
 ```
 npm install

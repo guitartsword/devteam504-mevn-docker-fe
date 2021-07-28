@@ -9,7 +9,7 @@
 import { defineComponent, onBeforeMount, ref } from 'vue';
 import ItemList from '@/components/ItemList.vue'; // @ is an alias to /src
 import NewItemForm from '@/components/NewItemForm.vue';
-import { getItemTransactions, ItemTransactionModel } from './ItemTransactions.service';
+import { getItemTransactions, ParsedItemTransactionModel } from './ItemTransactions.service';
 
 export default defineComponent({
   name: 'Home',
@@ -18,7 +18,7 @@ export default defineComponent({
     NewItemForm,
   },
   setup() {
-    const itemTransactions = ref<ItemTransactionModel>([]);
+    const itemTransactions = ref<ParsedItemTransactionModel[]>([]);
 
     const getItems = async () => {
       itemTransactions.value = await getItemTransactions();

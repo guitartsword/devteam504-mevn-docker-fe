@@ -13,12 +13,17 @@ interface ItemTransaction {
 
 export type ItemTransactionModel = BaseModel & ItemTransaction;
 
+export interface ParsedItemTransactionModel extends Omit<ItemTransactionModel, 'createdAt'|'updatedAt'>{
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface InventoryResponse {
-  transactions: ItemTransactionModel[];
+  transactions: ParsedItemTransactionModel[];
   total: number;
 }
 
-export const getItemTransactions = async () => {
+export const getItemTransactions = async (): Promise<ParsedItemTransactionModel[]> => {
   const response = await axios.get<ItemTransactionModel[]>('http://localhost:8020/api/item');
   return response.data.map((i) => ({
     ...i,
@@ -34,5 +39,12 @@ export const createItemTransaction = async (body: ItemTransaction) => {
 
 export const getItemInventory = async (itemName: string) => {
   const response = await axios.get<InventoryResponse>(`http://localhost:8020/api/inventario/${itemName}`);
-  return response.data;
+  return {
+    transactions: response.data.transactions.map((i) => ({
+      ...i,
+      createdAt: new Date(i.createdAt),
+      updatedAt: new Date(i.updatedAt),
+    })),
+    total: response.data.total,
+  };
 };
