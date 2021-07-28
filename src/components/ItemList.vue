@@ -7,16 +7,14 @@
         <th>Fecha</th>
       </tr>
       <tr v-for="item in items" :key="item.id">
-        <td>{{ item.name }}</td>
+        <td>
+          <router-link :to="'/item/' + item.name">{{ item.name }}</router-link>
+
+        </td>
         <td>{{ item.amount }}</td>
-        <td>{{ item.date.toLocaleString() }}</td>
+        <td>{{ item.createdAt.toLocaleString() }}</td>
       </tr>
     </table>
-    <ul>
-      <li >
-        {{ item.name }} {{ item.amount }}
-      </li>
-    </ul>
   </div>
 </template>
 

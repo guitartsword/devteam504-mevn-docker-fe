@@ -28,11 +28,11 @@ export const getItemTransactions = async () => {
 };
 
 export const createItemTransaction = async (body: ItemTransaction) => {
-  const response = await axios.post<ItemTransactionModel>('/api/item', body);
+  const response = await axios.post<ItemTransactionModel>('http://localhost:8020/api/item', body);
   return response;
 };
 
 export const getItemInventory = async (itemName: string) => {
-  const response = await axios.get<InventoryResponse>(`/api/inventario/${itemName}`);
+  const response = await axios.get<InventoryResponse>(`http://localhost:8020/api/inventario/${itemName}`);
   return response.data;
 };
